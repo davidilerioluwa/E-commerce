@@ -180,7 +180,8 @@ app.get("/api",(req,res)=>{
     }
     
  })
- app.get("/vendorApi",(req,res)=>{
+//  new
+ app.post("/vendorApi",(req,res)=>{
     if(req.user.accountType=="vendor"){
         // console.log(req.user.accountType=="vendor")
         res.send({message: "hello from server",
@@ -319,8 +320,8 @@ app.post("/createListing",upload.single("file"),(req,res,next)=>{
         }        
 
 })
-
-app.get("/getAllListings",(req,res)=>{
+// new
+app.post("/getAllListings",(req,res)=>{
     const username= req.user.username
      
     VendorDetails.find({username:username},(err,vendor)=>{
@@ -470,7 +471,8 @@ app.post("/createUser",upload.single("file"),(req,res,next)=>{
 
 
 //    cart
-app.get("/getCart",(req,res)=>{
+//new
+app.post("/getCart",(req,res)=>{
     // console.log("x");
     // res.send("k"
     
@@ -503,6 +505,7 @@ app.post("/addToCart",(req,res)=>{
             if(err){
                 console.log(err);
             }else{
+                res.send("sucessful")
                 console.log("item sucessfully added to cart");
             }
         })
@@ -566,8 +569,8 @@ app.post("/pay",(req,res)=>{
     const newTransaction =new Transaction(transaction)
 
 })
-
-app.get("/getTransactions",(req,res)=>{
+//new
+app.post("/getTransactions",(req,res)=>{
     const username= req.user.username
     console.log(username);
     transactions.find({username:username},(err,transactions)=>{
@@ -597,8 +600,8 @@ app.post("/createOrder",(req,res)=>{
     console.log(orders);
     
 })
-
-app.get("/getOrders",(req,res)=>{
+//new
+app.post("/getOrders",(req,res)=>{
     const username=req.user.username
     Orders.find({username:username},(err,orders)=>{
         if(err){
@@ -614,7 +617,7 @@ app.get("/getOrders",(req,res)=>{
 
 
 
-app.listen(process.env.port||3001,()=>console.log("server running"))
+app.listen(process.env.port||3000,()=>console.log("server running"))
 
 
 
